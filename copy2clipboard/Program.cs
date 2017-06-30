@@ -30,17 +30,11 @@ namespace copy2clipboard
 
         private static void copyAsSVG(string filepath)
         {
-            //StringCollection paths = new StringCollection
-            //{
-            //    filepath
-            //};
-            //Clipboard.SetFileDropList(paths);
             string svg = File.ReadAllText(filepath);
             byte[] bytes = Encoding.UTF8.GetBytes(svg);
             MemoryStream stream = new MemoryStream(bytes);
-            //DataObject dataObj = new DataObject();
-            //dataObj.SetData(stream);
-            Clipboard.SetData("image/svg+xml", stream);
+            DataObject dataObj = new DataObject("image/svg+xml", stream);
+            Clipboard.SetDataObject(dataObj, true); // true leaves object in memory!
         }
     }
 }
